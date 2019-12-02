@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="Weather application">
+        <title>Weather App</title>
+        <link rel="stylesheet" href="src/css/style.css">
+    </head>
+
+    <body>
+        <div class="container">
+            <header>
+                <h1>Weather App</h1>
+                <span class="row">
+                    <span id='today' class='active-btn'>Current</span> / <span id='forecast'>Forecast</span>
+                </span>
+                <span class="row">T&nbsp:&nbsp
+                    <span class="active-btn" id="temp">°C</span>
+                </span>
+            </header>
+            <form id="search-form">
+                <input type="text" id="search-input" placeholder="Enter city name" autocomplete="off">
+            </form>
+
+            <div class="error">
+                <p></p>
+            </div>
+
+            <main>
+                <div class="city-info">
+                    <h3 id="city-name"></h3>
+                    <img src="" id="weather-icon">
+                    <p id="weather-desc"></p>
+                </div>
+                <div id="weather-data"></div>
+            </main>
+
+
+
+
+        </div>
+
+        <script type="module" src="src/js/app.js"></script>
+    </body>
+
+</html>

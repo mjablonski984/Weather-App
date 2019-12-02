@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css?family=Anton&display=swap');
+
+$colors: (
+  primary-text: #11111d,
+  primary-light: #5aa6c9,
+  error: #800000
+);
+
+$font-size: (
+  normal: 1.6rem,
+  medium: 2rem,
+  big: 2.2rem
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}
+
+@function font-size($size) {
+  @return map-get($font-size, $size);
+}
+
+$desktop: 860px;
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+// GLOBALS
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: color(primary-text);
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  font-family: 'Anton', 'Helvetica', sans-serif;
+  overflow-y: hidden;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  user-select: none;
+
+  // CONTAINER
+
+  .container {
+    width: 90%;
+    min-height: 60%;
+    font-size: font-size(normal);
+    margin: auto;
+
+    @include desktop {
+      width: 80%;
+      max-width: 1110px;
+    }
+  }
+
+  p,
+  span {
+    letter-spacing: 1px;
+  }
+}
+
+// HEADER
+
+header {
+  margin-bottom: 2rem;
+  h1 {
+    letter-spacing: 3px;
+    margin: 0 auto font-size(normal);
+    color: color(primary-light);
+  }
+
+  .row {
+    display: inline-block;
+    line-height: 1.6;
+    font-size: 1.3rem;
+    margin: 0 1rem;
+    padding: 0.3rem 1rem;
+    width: max-content;
+
+    span {
+      cursor: pointer;
+      transition: font-size linear 0.3s;
+      width: 200px;
+      &:hover {
+        color: color(primary-light);
+      }
+    }
+
+    .active-btn {
+      font-size: font-size(medium);
+      color: color(primary-light);
+      &:hover {
+        text-shadow: 0px 1px 1px color(primary-light);
+      }
+    }
+  }
+}
+
+//  INPUT
+
+form {
+  margin-bottom: 2rem;
+  input {
+    padding: 0.8rem 1rem 0.3rem;
+    background: transparent;
+    border-style: none none solid none;
+    border-bottom: 2px solid color(primary-text);
+    border-radius: 2px;
+    font-size: font-size(normal);
+    outline: none;
+    text-align: center;
+    max-width: 35%;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+
+    @include desktop {
+      max-width: 500px;
+    }
+    &:focus {
+      border-bottom-color: color(primary-light);
+      color: color(primary-light);
+      font-weight: 500;
+    }
+    &::placeholder {
+      color: color(primary-light);
+      font-size: font-size(normal);
+    }
+  }
+}
+
+// ERROR
+.error {
+  margin-bottom: 10px;
+  p {
+    height: 2rem;
+    font-size: font-size(normal);
+    color: color(error);
+  }
+}
+
+// MAIN CONTAINER
+main {
+  margin: 0 auto 2rem;
+  height: 35rem;
+
+  h3 {
+    font-size: font-size(big);
+    letter-spacing: 2px;
+    color: color(primary-light);
+    font-weight: 700;
+  }
+
+  p#weather-desc {
+    color: color(primary-light);
+    font-size: font-size(medium);
+  }
+
+  #weather-data {
+    margin: 2rem 0;
+
+    .weather-data-current {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      line-height: 1.6;
+      opacity: 0;
+      transition: opacity ease-in-out 0.6s;
+      .numerals {
+        font-size: font-size(medium);
+        color: color(primary-light);
+      }
+      &.active-current {
+        opacity: 1;
+      }
+    }
+  }
+}
+// FORECAST CONTAINER
+
+.forecast-container {
+  display: flex;
+  overflow-x: scroll;
+  align-items: center;
+  padding: 0rem 1rem 1rem;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: color(primary-text);
+    border-radius: 3px;
+  }
+  .forecast-box {
+    min-width: 220px;
+    padding: 0 2rem 1rem;
+    line-height: 1.6;
+    margin: 0 auto;
+    align-self: center;
+    opacity: 0;
+    animation: box 0.3s ease-in-out forwards;
+    transition: 0.3s ease;
+
+    .forecast-data {
+      font-size: font-size(normal);
+
+      p {
+        color: color(primary-text);
+      }
+
+      #day {
+        font-size: font-size(medium);
+        color: color(primary-light);
+        margin-bottom: 8px;
+      }
+
+      #day-date {
+        font-size: font-size(normal);
+        color: color(primary-light);
+        margin-bottom: 6px;
+      }
+    }
+
+    &:nth-child(2) {
+      animation-delay: 0.3s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+    &:nth-child(4) {
+      animation-delay: 0.9s;
+    }
+    &:nth-child(5) {
+      animation-delay: 1.2s;
+    }
+  }
+  // Forecast boxes animation
+  @keyframes box {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
