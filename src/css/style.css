@@ -222,6 +222,7 @@ main #weather-data .weather-data-current.active-current {
       -ms-flex-align: center;
           align-items: center;
   padding: 0rem 1rem 1rem;
+  margin: 0 auto;
 }
 
 .forecast-container::-webkit-scrollbar {
